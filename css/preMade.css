@@ -1,0 +1,88 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+footer{
+    margin:auto 10px;
+    color:grey;
+    text-align:center
+}
+
+a{
+    text-decoration: none;
+}
+
+h1{
+    color:black;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+fieldset{
+    border-radius:10px;
+    border: 1px solid #007bff;
+    display: flex;
+    flex-direction: column;
+    margin:15px;
+    position:relative
+}
+
+fieldset legend{
+    font-weight: bold;
+    color:#007bff
+}
+
+fieldset img{
+    width:30px;
+    box-shadow:4px 4px 10px 2px grey;
+    border-radius:30px;
+}
+
+#buttons{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    top:30%;
+    right:10px
+}
+
+#saveButton{
+    position:absolute;
+    right:3%;
+    font-size:20px;
+    padding:7px;
+    border:none;  
+}
+
+fieldset img.edit{
+    box-sizing: border-box;
+    padding:4px;
+}
+
+fieldset img:hover,#addButton:hover,#saveButton.hover:hover{
+    cursor:pointer;
+    font-size: 22px;
+}
+
+#addButton{
+    position: fixed;
+    bottom:3%;
+    right:3%;
+    font-size:20px;
+    border-radius: 20px;
+    padding:7px;
+    border:2px solid #DDDDDD;    
+}
+
+.editLabels{
+    border:none;
+    font-size:inherit;
+    width:100%;
+    max-width:100%
+}
+
+.editLabels:focus{
+    border-color: transparent; 
+    outline: none;
+}

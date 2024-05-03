@@ -1,0 +1,116 @@
+[
+    {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "General Knowledge",
+        "question": "Who is the youngest person to recieve a Nobel Prize?",
+        "correct_answer": "Malala Yousafzai",
+        "incorrect_answers": [
+            "Lawrence Bragg",
+            "Werner Heisenberg",
+            "Yasser Arafat"
+        ]
+    },
+    {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "General Knowledge",
+        "question": "According to the nursery rhyme, what fruit did Little Jack Horner pull out of his Christmas pie?",
+        "correct_answer": "Plum",
+        "incorrect_answers": [
+            "Apple",
+            "Peach",
+            "Pear"
+        ]
+    },
+    {
+        "type": "boolean",
+        "difficulty": "easy",
+        "category": "General Knowledge",
+        "question": "The Lego Group was founded in 1932.",
+        "correct_answer": "True",
+        "incorrect_answers": [
+            "False"
+        ]
+    },
+    {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "General Knowledge",
+        "question": "What is the largest organ of the human body?",
+        "correct_answer": "Skin",
+        "incorrect_answers": [
+            "Heart",
+            "large Intestine",
+            "Liver"
+        ]
+    },
+    {
+        "type": "boolean",
+        "difficulty": "easy",
+        "category": "General Knowledge",
+        "question": "In 2010, Twitter and the United States Library of Congress partnered together to archive every tweet by American citizens.",
+        "correct_answer": "True",
+        "incorrect_answers": [
+            "False"
+        ]
+    },
+    {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "General Knowledge",
+        "question": "Which one of these is not a typical European sword design?",
+        "correct_answer": "Scimitar",
+        "incorrect_answers": [
+            "Falchion",
+            "Ulfberht",
+            "Flamberge"
+        ]
+    },
+    {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "General Knowledge",
+        "question": "Which restaurant&#039;s mascot is a clown?",
+        "correct_answer": "McDonald&#039;s",
+        "incorrect_answers": [
+            "Whataburger",
+            "Burger King",
+            "Sonic"
+        ]
+    },
+    {
+        "type": "boolean",
+        "difficulty": "easy",
+        "category": "General Knowledge",
+        "question": "Video streaming website YouTube was purchased in it&#039;s entirety by Facebook for US$1.65 billion in stock.",
+        "correct_answer": "False",
+        "incorrect_answers": [
+            "True"
+        ]
+    },
+    {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "General Knowledge",
+        "question": "Virgin Trains, Virgin Atlantic and Virgin Racing, are all companies owned by which famous entrepreneur?   ",
+        "correct_answer": "Richard Branson",
+        "incorrect_answers": [
+            "Alan Sugar",
+            "Donald Trump",
+            "Bill Gates"
+        ]
+    },
+    {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "General Knowledge",
+        "question": "What is the Zodiac symbol for Gemini?",
+        "correct_answer": "Twins",
+        "incorrect_answers": [
+            "Fish",
+            "Scales",
+            "Maiden"
+        ]
+    }
+]
