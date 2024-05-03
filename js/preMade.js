@@ -1,7 +1,5 @@
 'use strict'
 
-//helloo
-
 let quizname = localStorage.getItem("quizname");
 
 let questionNumber = localStorage.getItem
@@ -47,9 +45,9 @@ if (category == "General Knowledge") {
 //quizname
 let div = document.getElementById('container')
 
-let h2 = document.createElement('h2');
+let h2 = document.getElementById('quizname');
 h2.textContent = quizname;
-div.appendChild(h2);
+
 
 let saveButton = document.createElement('button');
 saveButton.textContent = "Save quiz";
@@ -110,6 +108,7 @@ function makeQuestion(question) {
     for (let answer of question.incorrect_answers) {
         let labelIncorrectAnswer = document.createElement('label');
         labelIncorrectAnswer.style.color = "red"
+        labelIncorrectAnswer.classList = 'incorrect'
         labelIncorrectAnswer.innerHTML = `<input type="radio" name='answers'>${answer}`
         arrayOfLabels.push(labelIncorrectAnswer)
     }
@@ -141,9 +140,6 @@ function makeQuestion(question) {
     editButton.src = '../images/edit-pencil.png'
     editButton.classList = 'edit'
     buttons.appendChild(editButton)
-
-    console.log(arrayOfQuestions)
-
 }
 
 let resetSaveButton = () => {
@@ -181,11 +177,20 @@ document.addEventListener('click', function (e) {
     } else if (e.target.classList.contains('edit')) {
         let currentFieldset = e.target.parentElement.parentElement;
         let editableLabels = currentFieldset.querySelectorAll('label');
-        let editableLegend = currentFieldset.querySelectorAll('legend');
+        let editableLegend = currentFieldset.querySelector('legend');
 
-        edit(editableLabels)
+        for (let label of editableLabels) {
+        edit(label)
+    }
+
         edit(editableLegend)
 
+    //edit quizname
+    } else if (e.target.classList.contains('editQuizname')) {
+        console.log(e)
+        let quizName=e.target.parentElement
+        console.log(quizName)
+        edit(quizName)       
         
         //save quiz       
     } else if (e.target.id == 'saveButton') {
@@ -223,12 +228,12 @@ document.addEventListener('click', function (e) {
 })
 
 //edit question
-async function edit(editableLabels){
-    for (let label of editableLabels) {
+
+async function edit(label){
         let innertext = await label.innerText;
-        label.innerHTML = `<input type="text" value="${innertext}" class='editLabels' size='${innertext.length}'>`;
+        label.innerHTML = `<input type="text" value="${innertext}" class='editLabels' size='${innertext.length}' style="#32de84">`; 
+         
     }
-}
 
 
 

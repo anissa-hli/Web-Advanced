@@ -32,8 +32,9 @@ fieldset legend{
     color:#007bff
 }
 
-fieldset img{
+fieldset img,img{
     width:30px;
+    height:30px;
     box-shadow:4px 4px 10px 2px grey;
     border-radius:30px;
 }
@@ -55,12 +56,12 @@ fieldset img{
     border:none;  
 }
 
-fieldset img.edit{
+fieldset img.edit,img{
     box-sizing: border-box;
     padding:4px;
 }
 
-fieldset img:hover,#addButton:hover,#saveButton.hover:hover{
+img:hover,#addButton:hover,#saveButton.hover:hover{
     cursor:pointer;
     font-size: 22px;
 }
@@ -78,11 +79,15 @@ fieldset img:hover,#addButton:hover,#saveButton.hover:hover{
 .editLabels{
     border:none;
     font-size:inherit;
-    width:100%;
-    max-width:100%
+    font-weight: inherit;
+    color:inherit
 }
 
-.editLabels:focus{
-    border-color: transparent; 
-    outline: none;
+#title{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    align-items: center;
 }
+
+
