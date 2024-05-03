@@ -61,9 +61,9 @@ fieldset img.edit,img{
     padding:4px;
 }
 
-img:hover,#addButton:hover,#saveButton.hover:hover{
+img:hover,button:hover{
     cursor:pointer;
-    font-size: 22px;
+    color:#007bff;
 }
 
 #addButton{
@@ -74,6 +74,12 @@ img:hover,#addButton:hover,#saveButton.hover:hover{
     border-radius: 20px;
     padding:7px;
     border:2px solid #DDDDDD;    
+}
+
+.buttonSaveQuestion{
+    border-radius: 20px;
+    border:2px solid #DDDDDD; 
+    font-size:100%;  
 }
 
 .editLabels{

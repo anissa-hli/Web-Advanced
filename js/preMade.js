@@ -1,7 +1,6 @@
 'use strict'
 
 let quizname = localStorage.getItem("quizname");
-
 let questionNumber = localStorage.getItem
     ("questionNumber");
 let difficulty = localStorage.getItem("difficulty");
@@ -48,21 +47,20 @@ let div = document.getElementById('container')
 let h2 = document.getElementById('quizname');
 h2.textContent = quizname;
 
-
 let saveButton = document.createElement('button');
 saveButton.textContent = "Save quiz";
 saveButton.id = 'saveButton';
 saveButton.classList = 'hover'
-div.appendChild(saveButton);
+div.before(saveButton);
 
 //category & difficulty
 let pCategory = document.createElement('p');
 pCategory.textContent = `Category: ${category}`
-div.appendChild(pCategory);
+div.before(pCategory);
 
 let pDiff = document.createElement('p');
 pDiff.textContent = `Difficulty: ${difficulty}`
-div.appendChild(pDiff);
+div.before(pDiff);
 
 //add-question button
 let addButton = document.createElement('button');
@@ -86,19 +84,17 @@ function shuffleArray(array) {
 
 let arrayOfQuestions = []
 
-
-
-
 function makeQuestion(question) {
+
+ 
     //questions
     var fieldset = document.createElement('fieldset');
     fieldset.classList = arrayOfQuestions.length;
     div.appendChild(fieldset);
-
-    arrayOfQuestions.push(question);
-
+  
     let legend = document.createElement('legend');
     legend.innerHTML = question.question;
+    legend.classList = 'legend'
 
     fieldset.appendChild(legend);
 
@@ -140,6 +136,7 @@ function makeQuestion(question) {
     editButton.src = '../images/edit-pencil.png'
     editButton.classList = 'edit'
     buttons.appendChild(editButton)
+
 }
 
 let resetSaveButton = () => {
@@ -149,10 +146,12 @@ let resetSaveButton = () => {
 
 }
 
-getData().then(questions => {
-    for (let question of questions) {
+getData().then(questions => {    
+    for(let question of questions){
+        arrayOfQuestions.push(question);
         makeQuestion(question)
-    }
+}
+    
 })
 
 document.addEventListener('click', function (e) {
@@ -179,19 +178,71 @@ document.addEventListener('click', function (e) {
         let editableLabels = currentFieldset.querySelectorAll('label');
         let editableLegend = currentFieldset.querySelector('legend');
 
+        let buttonSaveQuestion = document.createElement('button');
+        buttonSaveQuestion.textContent = 'Save changes'
+        buttonSaveQuestion.classList = 'buttonSaveQuestion'
+        e.target.parentElement.appendChild(buttonSaveQuestion)
+
         for (let label of editableLabels) {
-        edit(label)
-    }
+            edit(label)
+        }
 
         edit(editableLegend)
 
-    //edit quizname
+        //edit quizname
     } else if (e.target.classList.contains('editQuizname')) {
         console.log(e)
-        let quizName=e.target.parentElement
+        let quizName = e.target.parentElement
         console.log(quizName)
-        edit(quizName)       
+        edit(quizName)
+
+        //save edited question        
+    } else if (e.target.classList.contains('buttonSaveQuestion')) {
+        let currentQuestion = e.target.parentElement.parentElement
+        let index = currentQuestion.classList.value
+
+        console.log(currentQuestion)
+
+        let i = 0
+      
+        let editedQuestion = {
+            question: "Type question",
+            correct_answer: "Type correct answer here",
+            incorrect_answers: []
+        }
+
+        for (let child of currentQuestion.children) {
+            if (child.className == 'correct') {
+                editedQuestion.correct_answer = currentQuestion.children[i].firstChild.value
+                i++;
+            } else if (child.className == 'incorrect') {
+                editedQuestion.incorrect_answers.push(currentQuestion.children[i].firstChild.value)
+                i++;
+            } else if (child.className == 'legend') {
+                editedQuestion.question = currentQuestion.children[i].firstChild.value
+                i++;
+            }
+
+        }
+       
+      
+        arrayOfQuestions[index]=editedQuestion;
+        div.textContent='';
+        for(let question of arrayOfQuestions){
+        makeQuestion(arrayOfQuestions);
+    }
+    
+
+
         
+
+     
+    
+    
+
+
+
+
         //save quiz       
     } else if (e.target.id == 'saveButton') {
         new Promise((resolve, reject) => {
@@ -206,6 +257,7 @@ document.addEventListener('click', function (e) {
                 saveButton.textContent = 'Error. Retry'
                 saveButton.style.backgroundColor = 'red'
             })
+        //add a question
     } else if (e.target.id == 'addButton') {
         let answersNumber = prompt('How many different answers has your question?')
         let newQuestion = {
@@ -222,18 +274,18 @@ document.addEventListener('click', function (e) {
             newQuestion.incorrect_answers.push('Type incorrect answer here')
         }
 
+        arrayOfQuestions.push(newQuestion);
         makeQuestion(newQuestion);
-        resetSaveButton()
+          resetSaveButton()
     }
 })
 
 //edit question
 
-async function edit(label){
-        let innertext = await label.innerText;
-        label.innerHTML = `<input type="text" value="${innertext}" class='editLabels' size='${innertext.length}' style="#32de84">`; 
-         
-    }
+async function edit(label) {
+    let innertext = await label.innerText;
+    label.innerHTML = `<input type="text" value="${innertext}" class='editLabels' size='${innertext.length}' style="#32de84">`;
+}
 
 
 
