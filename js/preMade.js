@@ -82,16 +82,20 @@ function shuffleArray(array) {
     return array;
 }
 
+//edit question function
+async function edit(label) {
+    let innertext = await label.innerText;
+    label.innerHTML = `<input type="text" value="${innertext}" class='editLabels' size='${innertext.length}' style="#32de84">`;
+}
+
 let arrayOfQuestions = []
 
 function makeQuestion(question) {
-
- 
     //questions
     var fieldset = document.createElement('fieldset');
-    fieldset.classList = arrayOfQuestions.length;
+    fieldset.classList = arrayOfQuestions.length - 1;
     div.appendChild(fieldset);
-  
+
     let legend = document.createElement('legend');
     legend.innerHTML = question.question;
     legend.classList = 'legend'
@@ -136,29 +140,27 @@ function makeQuestion(question) {
     editButton.src = '../images/edit-pencil.png'
     editButton.classList = 'edit'
     buttons.appendChild(editButton)
-
 }
 
 let resetSaveButton = () => {
     saveButton.textContent = "Save changes"
     saveButton.style.backgroundColor = '';
-    saveButton.classList = 'hover'
-
+    saveButton.className = 'hover'
 }
 
-getData().then(questions => {    
-    for(let question of questions){
+getData().then(questions => {
+    for (let question of questions) {
         arrayOfQuestions.push(question);
         makeQuestion(question)
-}
-    
+    }
+
 })
 
+// remove a question
 document.addEventListener('click', function (e) {
-    // remove a question
     if (e.target.classList.contains('delete')) {
         if (confirm('Are you sure you want to delete this question')) {
-            arrayOfQuestions.splice(parseInt(e.target.parentElement.parentElement.classList), 1)
+            arrayOfQuestions.splice(e.target.parentElement.parentElement.classList, 1)
 
             let fieldsetToRemove = e.target.parentElement.parentElement;
             fieldsetToRemove.remove();
@@ -171,80 +173,72 @@ document.addEventListener('click', function (e) {
             });
         }
         resetSaveButton()
+    }
+})
 
-        //edit a question
-    } else if (e.target.classList.contains('edit')) {
+//edit a question
+document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('edit')) {
         let currentFieldset = e.target.parentElement.parentElement;
         let editableLabels = currentFieldset.querySelectorAll('label');
         let editableLegend = currentFieldset.querySelector('legend');
 
+        //save button for question
         let buttonSaveQuestion = document.createElement('button');
-        buttonSaveQuestion.textContent = 'Save changes'
+        buttonSaveQuestion.textContent = 'OK'
         buttonSaveQuestion.classList = 'buttonSaveQuestion'
         e.target.parentElement.appendChild(buttonSaveQuestion)
 
         for (let label of editableLabels) {
             edit(label)
         }
-
         edit(editableLegend)
+    }
+})
 
-        //edit quizname
-    } else if (e.target.classList.contains('editQuizname')) {
+//edit quizname
+document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('editQuizname')) {
         console.log(e)
         let quizName = e.target.parentElement
         console.log(quizName)
         edit(quizName)
+    }
+})
 
-        //save edited question        
-    } else if (e.target.classList.contains('buttonSaveQuestion')) {
-        let currentQuestion = e.target.parentElement.parentElement
-        let index = currentQuestion.classList.value
-
-        console.log(currentQuestion)
-
-        let i = 0
-      
+//save edited question    
+document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('buttonSaveQuestion')) {
+        let currentQuestion = e.target.parentElement.parentElement;
         let editedQuestion = {
             question: "Type question",
             correct_answer: "Type correct answer here",
             incorrect_answers: []
         }
-
-        for (let child of currentQuestion.children) {
+        for (let i = 0; i < currentQuestion.children.length; i++) {
+            let child = currentQuestion.children[i];
             if (child.className == 'correct') {
-                editedQuestion.correct_answer = currentQuestion.children[i].firstChild.value
-                i++;
+                editedQuestion.correct_answer = currentQuestion.children[i].firstChild.value;
+                currentQuestion.children[i].innerHTML = `<input type="radio" name="answers">${editedQuestion.correct_answer}`;
             } else if (child.className == 'incorrect') {
-                editedQuestion.incorrect_answers.push(currentQuestion.children[i].firstChild.value)
-                i++;
+                editedQuestion.incorrect_answers.push(currentQuestion.children[i].firstChild.value);
+                currentQuestion.children[i].innerHTML = `<input type="radio" name="answers">${currentQuestion.children[i].firstChild.value}`;
+
             } else if (child.className == 'legend') {
-                editedQuestion.question = currentQuestion.children[i].firstChild.value
-                i++;
+                editedQuestion.question = currentQuestion.children[i].firstChild.value;
+                currentQuestion.children[i].innerHTML = editedQuestion.question;
             }
-
         }
-       
-      
-        arrayOfQuestions[index]=editedQuestion;
-        div.textContent='';
-        for(let question of arrayOfQuestions){
-        makeQuestion(arrayOfQuestions);
+
+        arrayOfQuestions[currentQuestion.classList.value] = editedQuestion;
+        currentQuestion.lastChild.lastChild.remove()
+        resetSaveButton()
     }
-    
+})
 
-
-        
-
-     
-    
-    
-
-
-
-
-        //save quiz       
-    } else if (e.target.id == 'saveButton') {
+//save quiz       
+document.addEventListener('click', function (e) {
+    if (e.target.id == 'saveButton') {
         new Promise((resolve, reject) => {
             localStorage.setItem("questions", arrayOfQuestions)
             resolve('Saved succesfully');
@@ -257,8 +251,12 @@ document.addEventListener('click', function (e) {
                 saveButton.textContent = 'Error. Retry'
                 saveButton.style.backgroundColor = 'red'
             })
-        //add a question
-    } else if (e.target.id == 'addButton') {
+    }
+})
+
+//add a question
+document.addEventListener('click', function (e) {
+    if (e.target.id == 'addButton') {
         let answersNumber = prompt('How many different answers has your question?')
         let newQuestion = {
             question: "Type question",
@@ -267,25 +265,16 @@ document.addEventListener('click', function (e) {
         }
 
         //if use doesnt respond to prompt;
-        let number =
-            answersNumber == 0 ? 2 : answersNumber
-
+        let number = answersNumber == 0 ? 2 : answersNumber
         for (let i = 1; i < number; i++) {
             newQuestion.incorrect_answers.push('Type incorrect answer here')
         }
-
         arrayOfQuestions.push(newQuestion);
         makeQuestion(newQuestion);
-          resetSaveButton()
+        resetSaveButton()
     }
 })
 
-//edit question
-
-async function edit(label) {
-    let innertext = await label.innerText;
-    label.innerHTML = `<input type="text" value="${innertext}" class='editLabels' size='${innertext.length}' style="#32de84">`;
-}
 
 
 

@@ -61,7 +61,7 @@ fieldset img.edit,img{
     padding:4px;
 }
 
-img:hover,button:hover{
+img:hover,#saveButton.hover:hover,#buttons:hover,#addButton:hover{
     cursor:pointer;
     color:#007bff;
 }
