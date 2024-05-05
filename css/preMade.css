@@ -45,8 +45,18 @@ fieldset img,img{
     flex-direction: row;
     gap:10px;
     top:30%;
-    right:10px
+    right:10px;
 }
+
+button{
+    cursor:pointer
+}
+
+button[disabled]{
+    color:grey;
+    cursor:default
+}
+
 
 #saveButton{
     position:absolute;
@@ -59,12 +69,14 @@ fieldset img,img{
 fieldset img.edit,img{
     box-sizing: border-box;
     padding:4px;
+    cursor:pointer
+
 }
 
-img:hover,#saveButton.hover:hover,#buttons:hover,#addButton:hover{
+/* img:hover,#saveButton.hover:hover,#buttons:hover,#addButton:hover{
     cursor:pointer;
     color:#007bff;
-}
+} */
 
 #addButton{
     position: fixed;

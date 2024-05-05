@@ -145,7 +145,7 @@ function makeQuestion(question) {
 let resetSaveButton = () => {
     saveButton.textContent = "Save changes"
     saveButton.style.backgroundColor = '';
-    saveButton.className = 'hover'
+    saveButton.disabled = false
 }
 
 getData().then(questions => {
@@ -182,6 +182,7 @@ document.addEventListener('click', function (e) {
         let currentFieldset = e.target.parentElement.parentElement;
         let editableLabels = currentFieldset.querySelectorAll('label');
         let editableLegend = currentFieldset.querySelector('legend');
+        e.target.style.display='none'
 
         //save button for question
         let buttonSaveQuestion = document.createElement('button');
@@ -209,6 +210,8 @@ document.addEventListener('click', function (e) {
 //save edited question    
 document.addEventListener('click', function (e) {
     if (e.target.classList.contains('buttonSaveQuestion')) {
+        e.target.previousSibling.style.display="flex"
+
         let currentQuestion = e.target.parentElement.parentElement;
         let editedQuestion = {
             question: "Type question",
@@ -245,7 +248,7 @@ document.addEventListener('click', function (e) {
         }).then((result) => {
             saveButton.textContent = result
             saveButton.style.backgroundColor = '#32de84';
-            saveButton.classList.remove("hover")
+            saveButton.disabled=true
         },
             () => {
                 saveButton.textContent = 'Error. Retry'
