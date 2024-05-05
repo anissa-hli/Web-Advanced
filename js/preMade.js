@@ -107,15 +107,12 @@ function makeQuestion(question) {
     //false answers
     for (let answer of question.incorrect_answers) {
         let labelIncorrectAnswer = document.createElement('label');
-        labelIncorrectAnswer.style.color = "red"
         labelIncorrectAnswer.classList = 'incorrect'
         labelIncorrectAnswer.innerHTML = `<input type="radio" name='answers'>${answer}`
         arrayOfLabels.push(labelIncorrectAnswer)
     }
     //correct answers
     let labelCorrectAnswer = document.createElement('label');
-    labelCorrectAnswer.style.color = "#32de84"
-
     labelCorrectAnswer.innerHTML = `<input type="radio" name='answers'>${question.correct_answer}`
     labelCorrectAnswer.classList = 'correct'
     arrayOfLabels.push(labelCorrectAnswer)
@@ -243,7 +240,7 @@ document.addEventListener('click', function (e) {
 document.addEventListener('click', function (e) {
     if (e.target.id == 'saveButton') {
         new Promise((resolve, reject) => {
-            localStorage.setItem("questions", arrayOfQuestions)
+            localStorage.setItem(quizname, arrayOfQuestions)
             resolve('Saved succesfully');
         }).then((result) => {
             saveButton.textContent = result
