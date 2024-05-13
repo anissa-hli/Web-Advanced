@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triviatainment</title>
+    <link rel="stylesheet" href="../css/quizForm.css">
+
+</head>
+
+<body>
+    <a href="home.html">
+        <h1 id="title" class="quizForm">Triviatainment</h1>
+    </a>
+
+
+        <form id="form">
+            <div id="formcontainer">
+            <div>
+                <label for="quizname">Quizname</label>
+                <input type="text" id="quizname" placeholder="The million-dollar question(s)">
+            </div>
+            <div>
+                <label for="questionNumber">Number of questions</label>
+                <input type="number" id="questionNumber" value="10">
+            </div>
+            <div>
+                <fieldset>
+                    <legend>Difficulty</legend>
+                    <div>
+                        <input type="radio" name="difficulty" id="difficulty1" value="Easy" class="difficulty" checked>
+                        <label for="difficulty1">
+                            Easy
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" name="difficulty" id="difficulty2" class="difficulty" value="Medium">
+                        <label for="difficulty2">
+                            Medium
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" name="difficulty" id="difficulty3"  class="difficulty" value="Hard">
+                        <label for="difficulty3">
+                            Hard
+                        </label>
+                    </div>
+
+                </fieldset>
+            </div>
+            <div >
+                <label>
+                    Category
+                </label>
+                <select id="category">
+                    <option selected>General Knowledge</option>
+                    <option>Books</option>
+                    <option>Movies</option>
+                    <option>Music</option>
+                    <option>Art</option>
+                    <option>History</option>
+                    <option>Sports</option>
+                    <option>Geography</option>
+                    <option>Celebrities</option>
+                    <option>Vehicles</option>
+                    <option>Personal life</option>
+                </select>
+            </div>
+            <div>
+                <fieldset>
+                    <legend>Method</legend>
+                    <div>
+                        <input type="radio" name="method" value="preMade" id="preMade" class="method" checked>
+                        <label for="preMade">
+                            Quiz Creation: pre-made
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" name="method" value="tailorMake" id="tailorMake" class="method">
+                        <label for="tailorMake">
+                            Quiz Creation: tailor-make
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" name="method" value="takeQuiz" id="takeQuiz" class="method">
+                        <label for="takeQuiz">
+                            Quiz Play: take a quiz
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+                <button><img src="../images/chevron-right.png"></button>
+          
+        </form>
+   
+
+    <footer>
+        <p>Portfolio Web Advanced</p>
+        <p>&copy; Sahli Anissa - TI1</p>
+    </footer>
+
+
+
+    <script src="../js/quizForm.js"></script>
+</body>
+
+</html>

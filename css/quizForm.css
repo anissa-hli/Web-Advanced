@@ -1,0 +1,96 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+body{
+    /* background-color:#31363F; */
+    background-color: black;
+    color:white;
+    font-family:"Ubuntu Mono";
+    margin:0;
+    padding:0;
+}
+
+#title{
+    color:#E95793;
+    font-family:"Pacifico";
+    padding:0;
+    margin:0;
+    text-align: center;
+    font-size:3.5em;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+
+form{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+}
+
+#formcontainer{
+    display: flex;
+    flex-direction: column;
+    gap:1em;
+  margin-top:1em;
+    margin-bottom: 4em;
+    font-size:150%;
+    width:30em; 
+}
+
+input,select{
+    font-size:inherit;
+    font-family: inherit;
+ border:2px solid #E95793;
+ border-radius: 7px;
+ padding:5px;
+ color:white;
+ box-sizing: border-box;
+ background-color:black;
+}
+
+select,input[type='text'],input[type='number']{
+    width:32em;
+    margin-top:0.3em;
+}
+
+fieldset{
+    display: flex;
+    flex-direction: column;
+    gap:0.3em;
+    border-color:#E95793;
+    border-radius: 7px;
+    width:30.5em;
+}
+
+
+button{
+    border:none;
+    background: transparent;
+    position: absolute;
+    right:3%;
+    bottom:2%;
+    cursor:pointer;
+    
+}
+
+button img{
+    filter: invert(100%) grayscale(100%);
+    width:4em;
+    cursor: pointer;
+}
+
+
+footer{
+    border-top:1px solid #E95793;
+    color:#E95793;
+    text-align: center;
+    margin:10px;
+    padding:1em;
+}
+

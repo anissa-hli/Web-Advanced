@@ -1,5 +1,6 @@
 'use strict'
 
+
 let quizname = localStorage.getItem("quizname");
 let questionNumber = localStorage.getItem
     ("questionNumber");
@@ -85,7 +86,7 @@ function shuffleArray(array) {
 //edit question function
 async function edit(label) {
     let innertext = await label.innerText;
-    label.innerHTML = `<input type="text" value="${innertext}" class='editLabels' size='${innertext.length}' style="#32de84">`;
+    label.innerHTML = `<input type="text" value="${innertext}" class='editLabels' size='${innertext.length}'>`;
 }
 
 let arrayOfQuestions = []
@@ -96,7 +97,7 @@ function makeQuestion(question) {
     fieldset.classList = arrayOfQuestions.length - 1;
     div.appendChild(fieldset);
 
-    let legend = document.createElement('legend');
+    let legend = document.createElement('h4');
     legend.innerHTML = question.question;
     legend.classList = 'legend'
 
@@ -113,7 +114,8 @@ function makeQuestion(question) {
     }
     //correct answers
     let labelCorrectAnswer = document.createElement('label');
-    labelCorrectAnswer.innerHTML = `<input type="radio" name='answers'>${question.correct_answer}`
+    labelCorrectAnswer.innerHTML = `<input type="radio" name="answers">${question.correct_answer}`;//////
+
     labelCorrectAnswer.classList = 'correct'
     arrayOfLabels.push(labelCorrectAnswer)
 

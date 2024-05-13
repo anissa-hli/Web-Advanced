@@ -1,29 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+
 body{
-    font-family: Arial, Helvetica, sans-serif;
+    /* background-color:#31363F; */
+    background-color: black;
+    color:white;
+    font-family:"Ubuntu Mono";
+    margin:0;
+    padding:0;
 }
-footer{
-    margin:auto 10px;
-    color:grey;
-    text-align:center
+
+h1{
+    color:#E95793;
+    font-family:"Pacifico";
+    text-align: center;
+    font-size:3.5em;
+    margin:0;
 }
 
 a{
     text-decoration: none;
 }
 
-h1{
-    color:black;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 600;
-}
 
 
-fieldset img,img{
-    width:30px;
-    height:30px;
-    box-shadow:4px 4px 10px 2px grey;
-    border-radius:30px;
+
+input{
+    background: transparent;
 }
 
 #buttons{
@@ -53,11 +57,16 @@ button[disabled]{
     border:none;  
 }
 
+fieldset img,img{
+    width:30px;
+    height:30px;
+}
+
 fieldset img.edit,img{
     box-sizing: border-box;
     padding:4px;
-    cursor:pointer
-
+    cursor:pointer;
+    filter: invert(100%) grayscale(100%);
 }
 
 /* img:hover,#saveButton.hover:hover,#buttons:hover,#addButton:hover{
@@ -97,34 +106,31 @@ fieldset img.edit,img{
 
 
 fieldset {
-    max-width: 600px;
-    margin: 20px auto;
-    background: white;
-    padding: 40px;
-    border-radius: 10px;
-    border: none; 
+    max-width: 1000px;
+    width:100%;
+    margin: 10px auto;
+    background: transparent;
     display: flex;
     flex-direction: column;
-    position:relative;
-    border-bottom: 1px solid #aaa;
- 
+    position:relative; 
+    border-color:#E95793;
+    border-radius:5px;
   }
   
-  legend {
-    color: #aaa;
-    padding-bottom:10px;
-    margin-bottom: 0;
-    font-size: 1.0em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: bold;
-    
+  fieldset .legend {
+   font-size:1.5em;
+
   }
   
 label.correct{
-    color:#008000
+    color:#E95793;
 }
 
-label.incorrect{
-    color:red
+footer{
+    border-top:1px solid #E95793;
+    color:#E95793;
+    text-align: center;
+    margin:10px;
+    padding:1em;
 }
+
