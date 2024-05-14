@@ -82,6 +82,7 @@ button{
 button img{
     filter: invert(100%) grayscale(100%);
     width:4em;
+    height:4em;
     cursor: pointer;
 }
 

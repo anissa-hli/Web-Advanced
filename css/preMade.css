@@ -7,7 +7,7 @@ body{
     background-color: black;
     color:white;
     font-family:"Ubuntu Mono";
-    margin:0;
+    margin:auto 4em;
     padding:0;
 }
 
@@ -24,19 +24,110 @@ a{
 }
 
 
-
-
-input{
+.editLabels{
+    border:none;
+    font-size:inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    color:inherit;
     background: transparent;
 }
 
-#buttons{
-    position: absolute;
+
+#title{
     display: flex;
     flex-direction: row;
     gap:10px;
-    top:30%;
-    right:10px;
+    align-items: center;
+}
+
+  #quizContainer{
+    display: flex;
+    flex-direction: column;
+      }
+
+#container{
+    position: relative;
+    padding-bottom: 7em;
+    margin-top:2em;
+}
+
+/* fieldset */
+fieldset {
+    max-width: 1000px;
+    width:100%;
+    margin: 10px auto;
+    background: #E95793;
+    border:none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius:5px;
+    padding-top:0;
+
+  }
+  
+  fieldset:hover{
+    background-color: black;
+    border:3px solid #E95793;
+    box-sizing: border-box;
+  }
+
+
+  fieldset .legend {
+   font-size:1.5em;
+   margin-bottom:0.5em;
+
+  }
+
+  fieldset label{
+    font-size:1.25em;
+    display:flex;
+   margin-bottom:10px;
+  }
+  
+  fieldset img,img{
+    width:auto;
+    height:3em;
+    cursor:pointer;
+    filter: invert(100%) grayscale(100%);
+}
+
+fieldset img.edit{
+    height:2.35em;
+    width:2.35em
+}
+
+label.correct{
+    text-decoration: underline;
+}
+
+/* buttons */
+#buttons{
+    display: flex;
+    align-items: center;
+}
+
+#addButton{
+    position: fixed;
+    font-family: inherit;
+    bottom:3%;
+    right:3%;
+    font-size:20px;
+    border-radius: 30px;
+    padding:7px;
+    color:#E95793;
+    border:3px solid #E95793;    
+}
+
+.buttonSaveQuestion{
+    border-radius: 20px;
+    background-color: transparent;
+    border:none;
+    color:inherit;
+letter-spacing: 2px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size:120%;  
 }
 
 button{
@@ -48,84 +139,39 @@ button[disabled]{
     cursor:default
 }
 
-
 #saveButton{
     position:absolute;
+    font-family: inherit;
     right:3%;
     font-size:20px;
-    padding:7px;
-    border:none;  
-}
-
-fieldset img,img{
-    width:30px;
-    height:30px;
-}
-
-fieldset img.edit,img{
-    box-sizing: border-box;
-    padding:4px;
-    cursor:pointer;
-    filter: invert(100%) grayscale(100%);
-}
-
-/* img:hover,#saveButton.hover:hover,#buttons:hover,#addButton:hover{
-    cursor:pointer;
-    color:#007bff;
-} */
-
-#addButton{
-    position: fixed;
-    bottom:3%;
-    right:3%;
-    font-size:20px;
-    border-radius: 20px;
-    padding:7px;
-    border:2px solid #DDDDDD;    
-}
-
-.buttonSaveQuestion{
-    border-radius: 20px;
-    border:2px solid #DDDDDD; 
-    font-size:100%;  
-}
-
-.editLabels{
+    padding:10px;
+    background-color: #E95793;
+    color:white;
     border:none;
-    font-size:inherit;
-    font-weight: inherit;
-    color:inherit
+    border-radius: 20px; 
 }
 
-#title{
-    display: flex;
-    flex-direction: row;
-    gap:10px;
-    align-items: center;
-}
-
-
-fieldset {
-    max-width: 1000px;
-    width:100%;
-    margin: 10px auto;
-    background: transparent;
-    display: flex;
-    flex-direction: column;
-    position:relative; 
-    border-color:#E95793;
-    border-radius:5px;
-  }
-  
-  fieldset .legend {
-   font-size:1.5em;
-
-  }
-  
-label.correct{
+#saveButton:hover{
     color:#E95793;
+    background-color: white;
+    border:1px solid #E95793
 }
 
+#chevron-right{
+    border:none;
+    background: transparent;
+    position: absolute;
+    right:3%;
+    bottom:1%;
+    cursor:pointer;
+}
+#chevron-right img{
+    filter: invert(100%) grayscale(100%);
+    width:4em;
+    height:4em
+}
+
+/* footer */
 footer{
     border-top:1px solid #E95793;
     color:#E95793;

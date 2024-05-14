@@ -1,44 +1,11 @@
 'use strict'
 
+
 let quizname = localStorage.getItem("quizname");
 let questionNumber = localStorage.getItem
     ("questionNumber");
 let difficulty = localStorage.getItem("difficulty");
 let category = localStorage.getItem("category");
-let categorynumber;
-
-if (category == "General Knowledge") {
-    categorynumber = 9
-} else if (category == "Books") {
-    categorynumber = 10
-} else if (category == "Movies") {
-    categorynumber = 11
-} else if (category == "Music") {
-    categorynumber = 12
-} else if (category == "Art") {
-    categorynumber = 25
-} else if (category == "Sports") {
-    categorynumber = 21
-} else if (category == "Geography") {
-    categorynumber = 22
-} else if (category == "Celebrities") {
-    categorynumber = 26
-} else if (category == "Vehicles") {
-    categorynumber = 28
-} else if (category == "Animals") {
-    categorynumber = 27
-}
-
-
-// async function getData(){
-// let data=await fetch(`https://opentdb.com/api.php?amount=${questionNumber}&category=${categorynumber}&difficulty=${difficulty}`);
-// console.log(data)
-// return await data.json()
-// }
-
-// getData().then(data=>{
-//     console.log(data.results);
-// });
 
 
 //quizname
@@ -50,14 +17,12 @@ h2.textContent = quizname;
 let saveButton = document.createElement('button');
 saveButton.textContent = "Save quiz";
 saveButton.id = 'saveButton';
-saveButton.classList = 'hover'
 div.before(saveButton);
 
 //category & difficulty
 let pCategory = document.createElement('p');
 pCategory.textContent = `Category: ${category}`
 div.before(pCategory);
-
 let pDiff = document.createElement('p');
 pDiff.textContent = `Difficulty: ${difficulty}`
 div.before(pDiff);
@@ -69,11 +34,6 @@ addButton.textContent = 'Add a question'
 document.body.appendChild(addButton)
 
 
-async function getData() {
-    let data = await fetch('../object.json');
-    return await data.json()
-}
-
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -84,16 +44,8 @@ function shuffleArray(array) {
 
 //edit question function
 async function edit(label) {
- 
     let innertext = await label.innerText;
-    //to avoid input area making fieldset wider
-    let length
-    if(innertext.length<50){
-        length=innertext.length
-    }else{
-        length=70;
-    }
-    label.innerHTML = `<input type="text" value="${innertext}" class='editLabels' size='${length}'>`;
+    label.innerHTML = `<input type="text" value="${innertext}" class='editLabels' size='${innertext.length}'>`;
 }
 
 let arrayOfQuestions = []
@@ -109,22 +61,24 @@ function makeQuestion(question) {
     fieldset.appendChild(quizContainer)
 
     let legend = document.createElement('h4');
-    legend.innerHTML =question.question;
+    legend.innerHTML="Type question here.";
     legend.classList = 'legend'
 quizContainer.appendChild(legend)
    
+
     //answers
     let arrayOfLabels = []
     //false answers
     for (let answer of question.incorrect_answers) {
         let labelIncorrectAnswer = document.createElement('label');
         labelIncorrectAnswer.classList = 'incorrect'
-        labelIncorrectAnswer.innerHTML = `<input type="radio" name='answers'>${answer}`
+        labelIncorrectAnswer.innerHTML = `<input type="radio" name='answers'>Type incorrect answer here.`
         arrayOfLabels.push(labelIncorrectAnswer)
     }
     //correct answers
     let labelCorrectAnswer = document.createElement('label');
-    labelCorrectAnswer.innerHTML = `<input type="radio" name="answers" checked>${question.correct_answer}`;
+    labelCorrectAnswer.innerHTML = `<input type="radio" name="answers" checked>Type incorrect answer here`;//////
+
     labelCorrectAnswer.classList = 'correct'
     arrayOfLabels.push(labelCorrectAnswer)
 
@@ -156,13 +110,6 @@ let resetSaveButton = () => {
     saveButton.disabled = false
 }
 
-getData().then(questions => {
-    for (let question of questions) {
-        arrayOfQuestions.push(question);
-        makeQuestion(question)
-    }
-
-})
 
 // remove a question
 document.addEventListener('click', function (e) {
@@ -188,11 +135,10 @@ document.addEventListener('click', function (e) {
 document.addEventListener('click', function (e) {
     if (e.target.classList.contains('edit')) {
         let currentFieldset = e.target.parentElement.parentElement;
-     
         let editableLabels = currentFieldset.querySelectorAll('label');
-        let editableLegend = currentFieldset.querySelector('.legend');
+        let editableLegend = currentFieldset.querySelector('legend');
         e.target.style.display='none'
-    
+
         //save button for question
         let buttonSaveQuestion = document.createElement('button');
         buttonSaveQuestion.textContent = 'OK'
@@ -202,7 +148,6 @@ document.addEventListener('click', function (e) {
         for (let label of editableLabels) {
             edit(label)
         }
-
         edit(editableLegend)
     }
 })
@@ -210,6 +155,7 @@ document.addEventListener('click', function (e) {
 //edit quizname
 document.addEventListener('click', function (e) {
     if (e.target.classList.contains('editQuizname')) {
+        console.log(e)
         let quizName = e.target.parentElement
         console.log(quizName)
         edit(quizName)
@@ -219,35 +165,31 @@ document.addEventListener('click', function (e) {
 //save edited question    
 document.addEventListener('click', function (e) {
     if (e.target.classList.contains('buttonSaveQuestion')) {
-        e.target.previousSibling.style.display="flex";
+        e.target.previousSibling.style.display="flex"
 
-        let currentQuestion = e.target.parentElement.parentElement.children[0];
-
+        let currentQuestion = e.target.parentElement.parentElement;
         let editedQuestion = {
             question: "Type question",
             correct_answer: "Type correct answer here",
             incorrect_answers: []
         }
-       
-        for (let i = 0; i <currentQuestion.children.length; i++) {
+        for (let i = 0; i < currentQuestion.children.length; i++) {
             let child = currentQuestion.children[i];
-            if (child.className === 'correct') {
-                editedQuestion.correct_answer = child.firstChild.value;
-                child.innerHTML = `<input type="radio" name="answers">${editedQuestion.correct_answer}`;
+            if (child.className == 'correct') {
+                editedQuestion.correct_answer = currentQuestion.children[i].firstChild.value;
+                currentQuestion.children[i].innerHTML = `<input type="radio" name="answers">${editedQuestion.correct_answer}`;
             } else if (child.className == 'incorrect') {
-                editedQuestion.incorrect_answers.push(child.firstChild.value);
-                child.innerHTML = `<input type="radio" name="answers">${child.firstChild.value}`;
+                editedQuestion.incorrect_answers.push(currentQuestion.children[i].firstChild.value);
+                currentQuestion.children[i].innerHTML = `<input type="radio" name="answers">${currentQuestion.children[i].firstChild.value}`;
+
             } else if (child.className == 'legend') {
-                editedQuestion.question = child.firstChild.value
-                child.innerHTML = editedQuestion.question;
+                editedQuestion.question = currentQuestion.children[i].firstChild.value;
+                currentQuestion.children[i].innerHTML = editedQuestion.question;
             }
-            
         }
-      
+
         arrayOfQuestions[currentQuestion.classList.value] = editedQuestion;
-   
-        //
-      currentQuestion.parentElement.children[1].children[2].remove()
+        currentQuestion.lastChild.lastChild.remove()
         resetSaveButton()
     }
 })
@@ -280,7 +222,7 @@ document.addEventListener('click', function (e) {
             incorrect_answers: []
         }
 
-        //if user doesnt respond to prompt;
+        //if use doesnt respond to prompt;
         let number = answersNumber == 0 ? 2 : answersNumber
         for (let i = 1; i < number; i++) {
             newQuestion.incorrect_answers.push('Type incorrect answer here')
@@ -290,6 +232,7 @@ document.addEventListener('click', function (e) {
         resetSaveButton()
     }
 })
+
 
 
 
