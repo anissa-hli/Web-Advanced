@@ -1,9 +1,9 @@
 'use strict'
+let arrayOfQuestions = []
 
 let quizname = localStorage.getItem("quizname");
-let questionNumber = localStorage.getItem
-    ("questionNumber");
-let difficulty = localStorage.getItem("difficulty");
+let questionNumber = localStorage.getItem("questionNumber");
+let difficulty = localStorage.getItem("difficulty").toLowerCase();
 let category = localStorage.getItem("category");
 let categorynumber;
 
@@ -30,15 +30,21 @@ if (category == "General Knowledge") {
 }
 
 
-// async function getData(){
-// let data=await fetch(`https://opentdb.com/api.php?amount=${questionNumber}&category=${categorynumber}&difficulty=${difficulty}`);
-// console.log(data)
-// return await data.json()
-// }
+//fetch API 
+async function getData(){
+let data=await fetch(`https://opentdb.com/api.php?amount=${questionNumber}&category=${categorynumber}&difficulty=${difficulty}`);
+console.log(data)
+return await data.json()
 
-// getData().then(data=>{
-//     console.log(data.results);
-// });
+}
+
+getData().then(questions => {
+    for (let question of questions.results) {
+        arrayOfQuestions.push(question);
+        makeQuestion(question)
+    }
+})
+
 
 
 //quizname
@@ -47,34 +53,28 @@ let div = document.getElementById('container')
 let h2 = document.getElementById('quizname');
 h2.textContent = quizname;
 
-let saveButton = document.createElement('button');
-saveButton.textContent = "Save quiz";
-saveButton.id = 'saveButton';
-saveButton.classList = 'hover'
-div.before(saveButton);
-
 //category & difficulty
-let pCategory = document.createElement('p');
-pCategory.textContent = `Category: ${category}`
-div.before(pCategory);
-
-let pDiff = document.createElement('p');
-pDiff.textContent = `Difficulty: ${difficulty}`
-div.before(pDiff);
-
-//add-question button
-let addButton = document.createElement('button');
-addButton.id = 'addButton';
-addButton.textContent = 'Add a question'
-document.body.appendChild(addButton)
-
-
-async function getData() {
-    let data = await fetch('../object.json');
-    return await data.json()
+let typeText = (typeTextArea, text, speed = 50, index = 0) => {
+    if (index < text.length) {
+        typeTextArea.textContent += text.charAt(index);
+        setTimeout(function () {
+            typeText(typeTextArea, text, speed, index + 1);
+        }, speed);
+    } 
 }
 
-function shuffleArray(array) {
+let pCategory = document.getElementById('category');
+ typeText(pCategory,`Category: ${category}`)
+
+let pDiff = document.getElementById('difficulty',100);
+typeText(pDiff,`Difficulty: ${difficulty}`,100)
+
+
+
+
+//FUNCTIONS
+
+function shuffleArray(array) { //randomly ordered - to avoid correct answer always being last !!https://chat.openai.com/c/142f9656-8aba-45ce-ac73-4c154934c1c7 
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
@@ -96,8 +96,6 @@ async function edit(label) {
     label.innerHTML = `<input type="text" value="${innertext}" class='editLabels' size='${length}'>`;
 }
 
-let arrayOfQuestions = []
-
 function makeQuestion(question) {
     //questions
     let fieldset = document.createElement('fieldset');
@@ -115,20 +113,20 @@ quizContainer.appendChild(legend)
    
     //answers
     let arrayOfLabels = []
-    //false answers
+    //incorrect answers
     for (let answer of question.incorrect_answers) {
         let labelIncorrectAnswer = document.createElement('label');
         labelIncorrectAnswer.classList = 'incorrect'
         labelIncorrectAnswer.innerHTML = `<input type="radio" name='answers'>${answer}`
         arrayOfLabels.push(labelIncorrectAnswer)
     }
-    //correct answers
+    //correct answer
     let labelCorrectAnswer = document.createElement('label');
-    labelCorrectAnswer.innerHTML = `<input type="radio" name="answers" checked>${question.correct_answer}`;
+    labelCorrectAnswer.innerHTML = `<input type="radio" name="answers">${question.correct_answer}`;
     labelCorrectAnswer.classList = 'correct'
     arrayOfLabels.push(labelCorrectAnswer)
 
-    shuffleArray(arrayOfLabels) //randomly ordered - to avoid correct answer always being last !!https://chat.openai.com/c/142f9656-8aba-45ce-ac73-4c154934c1c7 
+    shuffleArray(arrayOfLabels) 
 
     for (let label of arrayOfLabels) {
         quizContainer.appendChild(label)
@@ -156,21 +154,13 @@ let resetSaveButton = () => {
     saveButton.disabled = false
 }
 
-getData().then(questions => {
-    for (let question of questions) {
-        arrayOfQuestions.push(question);
-        makeQuestion(question)
-    }
-
-})
-
 // remove a question
 document.addEventListener('click', function (e) {
     if (e.target.classList.contains('delete')) {
-        if (confirm('Are you sure you want to delete this question')) {
-            arrayOfQuestions.splice(e.target.parentElement.parentElement.classList, 1)
-
+        if (confirm('Are you sure you want to delete this question?')) {
             let fieldsetToRemove = e.target.parentElement.parentElement;
+
+            arrayOfQuestions.splice(fieldsetToRemove.classList, 1)         
             fieldsetToRemove.remove();
 
             let remainingFieldsets = document.querySelectorAll('fieldset');
@@ -190,20 +180,20 @@ document.addEventListener('click', function (e) {
         let currentFieldset = e.target.parentElement.parentElement;
      
         let editableLabels = currentFieldset.querySelectorAll('label');
+        for (let label of editableLabels) {
+            edit(label)
+        }
+
         let editableLegend = currentFieldset.querySelector('.legend');
         e.target.style.display='none'
+        edit(editableLegend)
+
     
         //save button for question
         let buttonSaveQuestion = document.createElement('button');
         buttonSaveQuestion.textContent = 'OK'
         buttonSaveQuestion.classList = 'buttonSaveQuestion'
         e.target.parentElement.appendChild(buttonSaveQuestion)
-
-        for (let label of editableLabels) {
-            edit(label)
-        }
-
-        edit(editableLegend)
     }
 })
 
@@ -290,6 +280,9 @@ document.addEventListener('click', function (e) {
         resetSaveButton()
     }
 })
+
+
+
 
 
 

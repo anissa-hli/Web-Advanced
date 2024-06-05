@@ -1,46 +1,36 @@
 'use strict'
 
-
 let quizname = localStorage.getItem("quizname");
-let questionNumber = localStorage.getItem
-    ("questionNumber");
+let questionNumber = localStorage.getItem("questionNumber");
 let difficulty = localStorage.getItem("difficulty");
 let category = localStorage.getItem("category");
 
-
 //quizname
 let div = document.getElementById('container')
-
 let h2 = document.getElementById('quizname');
 h2.textContent = quizname;
+
+//category & difficulty
+let typeText = (typeTextArea, text, speed = 50, index = 0) => {
+    if (index < text.length) {
+        typeTextArea.textContent += text.charAt(index);
+        setTimeout(function () {
+            typeText(typeTextArea, text, speed, index + 1);
+        }, speed);
+    } 
+}
+
+let pCategory = document.getElementById('category');
+ typeText(pCategory,`Category: ${category}`)
+
+let pDiff = document.getElementById('difficulty',100);
+typeText(pDiff,`Difficulty: ${difficulty}`,100)
 
 let saveButton = document.createElement('button');
 saveButton.textContent = "Save quiz";
 saveButton.id = 'saveButton';
 div.before(saveButton);
 
-//category & difficulty
-let pCategory = document.createElement('p');
-pCategory.textContent = `Category: ${category}`
-div.before(pCategory);
-let pDiff = document.createElement('p');
-pDiff.textContent = `Difficulty: ${difficulty}`
-div.before(pDiff);
-
-//add-question button
-let addButton = document.createElement('button');
-addButton.id = 'addButton';
-addButton.textContent = 'Add a question'
-document.body.appendChild(addButton)
-
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
 
 //edit question function
 async function edit(label) {
@@ -64,7 +54,6 @@ function makeQuestion(question) {
     legend.innerHTML="Type question here.";
     legend.classList = 'legend'
 quizContainer.appendChild(legend)
-   
 
     //answers
     let arrayOfLabels = []
@@ -77,12 +66,10 @@ quizContainer.appendChild(legend)
     }
     //correct answers
     let labelCorrectAnswer = document.createElement('label');
-    labelCorrectAnswer.innerHTML = `<input type="radio" name="answers" checked>Type incorrect answer here`;//////
+    labelCorrectAnswer.innerHTML = `<input type="radio" name="answers">Type correct answer here`;
 
     labelCorrectAnswer.classList = 'correct'
     arrayOfLabels.push(labelCorrectAnswer)
-
-    shuffleArray(arrayOfLabels) //randomly ordered - to avoid correct answer always being last !!https://chat.openai.com/c/142f9656-8aba-45ce-ac73-4c154934c1c7 
 
     for (let label of arrayOfLabels) {
         quizContainer.appendChild(label)
@@ -136,7 +123,7 @@ document.addEventListener('click', function (e) {
     if (e.target.classList.contains('edit')) {
         let currentFieldset = e.target.parentElement.parentElement;
         let editableLabels = currentFieldset.querySelectorAll('label');
-        let editableLegend = currentFieldset.querySelector('legend');
+        let editableLegend = currentFieldset.querySelector('.legend'); 
         e.target.style.display='none'
 
         //save button for question
@@ -162,34 +149,38 @@ document.addEventListener('click', function (e) {
     }
 })
 
-//save edited question    
+//save edited question     
 document.addEventListener('click', function (e) {
     if (e.target.classList.contains('buttonSaveQuestion')) {
-        e.target.previousSibling.style.display="flex"
+        e.target.previousSibling.style.display="flex";
 
-        let currentQuestion = e.target.parentElement.parentElement;
+        let currentQuestion = e.target.parentElement.parentElement.children[0];
+
         let editedQuestion = {
             question: "Type question",
             correct_answer: "Type correct answer here",
             incorrect_answers: []
         }
-        for (let i = 0; i < currentQuestion.children.length; i++) {
+       
+        for (let i = 0; i <currentQuestion.children.length; i++) {
             let child = currentQuestion.children[i];
-            if (child.className == 'correct') {
-                editedQuestion.correct_answer = currentQuestion.children[i].firstChild.value;
-                currentQuestion.children[i].innerHTML = `<input type="radio" name="answers">${editedQuestion.correct_answer}`;
+            if (child.className === 'correct') {
+                editedQuestion.correct_answer = child.firstChild.value;
+                child.innerHTML = `<input type="radio" name="answers">${editedQuestion.correct_answer}`;
             } else if (child.className == 'incorrect') {
-                editedQuestion.incorrect_answers.push(currentQuestion.children[i].firstChild.value);
-                currentQuestion.children[i].innerHTML = `<input type="radio" name="answers">${currentQuestion.children[i].firstChild.value}`;
-
+                editedQuestion.incorrect_answers.push(child.firstChild.value);
+                child.innerHTML = `<input type="radio" name="answers">${child.firstChild.value}`;
             } else if (child.className == 'legend') {
-                editedQuestion.question = currentQuestion.children[i].firstChild.value;
-                currentQuestion.children[i].innerHTML = editedQuestion.question;
+                editedQuestion.question = child.firstChild.value
+                child.innerHTML = editedQuestion.question;
             }
+            
         }
-
+      
         arrayOfQuestions[currentQuestion.classList.value] = editedQuestion;
-        currentQuestion.lastChild.lastChild.remove()
+   
+        //
+      currentQuestion.parentElement.children[1].children[2].remove()
         resetSaveButton()
     }
 })
@@ -212,30 +203,37 @@ document.addEventListener('click', function (e) {
     }
 })
 
-//add a question
+//create questions if chosen option was tailormake
+let newQuestion = (quantity) => {
+    let quantityInt= parseInt(quantity);
+    for(let j=0;j<quantityInt;j++){
+    let answersNumber = prompt('How many different answers has your question?')
+    let newQuestion = {
+        question: "q",
+        correct_answer: "c",
+        incorrect_answers: []
+    }
+
+    //if use doesnt respond to prompt;
+    let number = answersNumber == 0 ? 2 : answersNumber
+    for (let i = 1; i < number; i++) {
+        newQuestion.incorrect_answers.push('ic')
+    }
+    arrayOfQuestions.push(newQuestion);
+    makeQuestion(newQuestion);
+    resetSaveButton()
+}
+}
+
+// add a question
 document.addEventListener('click', function (e) {
     if (e.target.id == 'addButton') {
-        let answersNumber = prompt('How many different answers has your question?')
-        let newQuestion = {
-            question: "Type question",
-            correct_answer: "Type correct answer here",
-            incorrect_answers: []
-        }
-
-        //if use doesnt respond to prompt;
-        let number = answersNumber == 0 ? 2 : answersNumber
-        for (let i = 1; i < number; i++) {
-            newQuestion.incorrect_answers.push('Type incorrect answer here')
-        }
-        arrayOfQuestions.push(newQuestion);
-        makeQuestion(newQuestion);
-        resetSaveButton()
+        newQuestion(1);
     }
 })
 
 
-
-
+newQuestion(questionNumber);
 
 
 

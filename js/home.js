@@ -39,3 +39,4 @@ typeTextArea.addEventListener('click',function(){
     typeTextArea.classList="top"
         window.open('quizForm.html','_self')
 })
+

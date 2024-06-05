@@ -19,8 +19,19 @@ h1{
     margin:0;
 }
 
+#quizname{
+    font-family: 'Ubuntu Mono';
+    font-size:3em;
+    text-transform: uppercase;
+}
+
 a{
     text-decoration: none;
+}
+
+.infoBox{
+    font-size: 150%;
+    text-transform:uppercase
 }
 
 
@@ -50,13 +61,17 @@ a{
     position: relative;
     padding-bottom: 7em;
     margin-top:2em;
+    display: flex;
+    flex-direction: column;
+    gap:1.5em;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* fieldset */
 fieldset {
     max-width: 1000px;
     width:100%;
-    margin: 10px auto;
     background: #E95793;
     border:none;
     display: flex;
@@ -99,7 +114,8 @@ fieldset img.edit{
 }
 
 label.correct{
-    text-decoration: underline;
+   color:#32de84;
+   font-weight: bold;
 }
 
 /* buttons */
@@ -142,7 +158,8 @@ button[disabled]{
 #saveButton{
     position:absolute;
     font-family: inherit;
-    right:3%;
+    top:36%;
+    right:6%;
     font-size:20px;
     padding:10px;
     background-color: #E95793;
