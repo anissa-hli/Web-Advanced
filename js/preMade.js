@@ -7,26 +7,46 @@ let difficulty = localStorage.getItem("difficulty").toLowerCase();
 let category = localStorage.getItem("category");
 let categorynumber;
 
-if (category == "General Knowledge") {
-    categorynumber = 9
-} else if (category == "Books") {
-    categorynumber = 10
-} else if (category == "Movies") {
-    categorynumber = 11
-} else if (category == "Music") {
-    categorynumber = 12
-} else if (category == "Art") {
-    categorynumber = 25
-} else if (category == "Sports") {
-    categorynumber = 21
-} else if (category == "Geography") {
-    categorynumber = 22
-} else if (category == "Celebrities") {
-    categorynumber = 26
-} else if (category == "Vehicles") {
-    categorynumber = 28
-} else if (category == "Animals") {
-    categorynumber = 27
+switch(category){
+    case "General Knowledge":
+        categorynumber = 9;
+        break;
+    case "Books":
+        categorynumber = 10;
+        break;
+    case "Movies":
+        categorynumber = 11;
+        break;
+    case "Music":
+        categorynumber = 12;
+        break;
+    case "Art":
+        categorynumber = 25;
+        break;
+    case "Sports":
+        categorynumber = 21;
+        break;
+    case "Geography":
+        categorynumber = 22;
+        break;
+    case "Celebrities":
+        categorynumber = 26;
+        break;
+    case "Vehicles":
+        categorynumber = 28;
+        break;
+    case "Animals":
+        categorynumber = 27;
+        break;
+    case "Math":
+        categorynumber = 19;
+        break;
+    case "Anime & Manga":
+        categorynumber = 31;
+        break;
+    case "Nature":
+        categorynumber = 17;
+        break;
 }
 
 
@@ -233,20 +253,25 @@ document.addEventListener('click', function (e) {
             }
             
         }
-      
-        arrayOfQuestions[currentQuestion.classList.value] = editedQuestion;
+        arrayOfQuestions[currentQuestion.parentElement.classList.value] = editedQuestion;
    
         //
       currentQuestion.parentElement.children[1].children[2].remove()
+      console.log(arrayOfQuestions)
         resetSaveButton()
     }
 })
+
 
 //save quiz       
 document.addEventListener('click', function (e) {
     if (e.target.id == 'saveButton') {
         new Promise((resolve, reject) => {
-            localStorage.setItem(quizname, arrayOfQuestions)
+
+            let quizes = JSON.parse(localStorage.getItem('AllQuizes')) || [];
+            quizes.push({ name: quizname, questions: arrayOfQuestions });
+            localStorage.setItem('AllQuizes', JSON.stringify(quizes));
+            console.log(JSON.parse(localStorage.getItem('AllQuizes')));
             resolve('Saved succesfully');
         }).then((result) => {
             saveButton.textContent = result
