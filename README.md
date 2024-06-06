@@ -3,6 +3,7 @@
 Welkom bij Triviatainment, een applicatie waarmee gebruikers gepersonaliseerde quizzen kunnen maken of genereren met behulp van een Quiz-API.
 
 ## Onderwerpen
+De regelnummers die ik bij elk onderwerp heb vermeld zijn enkel voorbeelden en bij lange niet de enige plaatsen waar het onderwerp is opgenomen.
 ### quizForm.html + quizForm.js:
 - **Formulier validatie:** Gebruikers moeten een formulier invullen om een quiz op maat te kunnen genereren. Het formulier valideert inputgegevens. (lijn 6)
 - **Event handling:** Het formulier wordt afgehandeld met een submit event. (lijn 6)
@@ -10,14 +11,15 @@ Welkom bij Triviatainment, een applicatie waarmee gebruikers gepersonaliseerde q
 - **LocalStorage:** Gebruik van LocalStorage om formuliergegevens op te slaan voor gebruik op de volgende pagina. (lijn 19 - 22)
 
 ### preMade.js:
-- **Element selecteren en manipuleren:** Elementen worden geselecteerd en gemanipuleerd met JavaScript. (lijn 98)
-- **Template literals:** (lijn 126)
-- **Async & Await:** (lijn 345)
-- **Fetch API:** Data wordt opgehaald uit een Trivia-database met behulp van een API-fetch. (lijn 346)
-- **Consumer methods:** Het resultaat van de fetch, de vragen van de quiz, wordt weergegeven op de pagina. (lijn 351)
-- **Array iteratie en JSON manipulatie:** Iteratie over een array en manipulatie van JSON-gegevens voor weergave. (lijn 352)
-- **Arrow functions:** (lijn 181)
-- **Promise:** Gebruik van promises om gegevens op te slaan in LocalStorage en de weergave van de save-button te wijzigen op basis van de respons. (lijn 272)
+- **Element selecteren en manipuleren:** Elementen worden geselecteerd en gemanipuleerd met JavaScript. (lijn 101-102)
+- **Template literals:** (lijn 129)
+- **Async & Await:** (lijn 348)
+- **Fetch API:** Data wordt opgehaald uit een Trivia-database met behulp van een API-fetch. (lijn 349)
+- **Consumer methods:** Het resultaat van de fetch, de vragen van de quiz, wordt weergegeven op de pagina. (lijn 354)
+- **Array iteratie en JSON manipulatie:** Iteratie over een array en manipulatie van JSON-gegevens voor weergave. (lijn 355)
+- **Arrow functions:** (lijn 184)
+- **Promise:** Gebruik van promises om gegevens op te slaan in LocalStorage en de weergave van de save-button te wijzigen op basis van de respons. (lijn 275)
+- **Destructuring:** (lijn 4)
 
 ### myQuizzes.js:
 - **Callback functie:** Gebruik van een callback-functie die als argument wordt doorgegeven aan de filter-methode. (lijn 56)

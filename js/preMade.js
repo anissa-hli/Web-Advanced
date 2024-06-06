@@ -1,10 +1,13 @@
 'use strict'
 let arrayOfQuestions = []
 
-let quizname = localStorage.getItem("quizname");
-let questionNumber = localStorage.getItem("questionNumber");
-let difficulty = localStorage.getItem("difficulty").toLowerCase();
-let category = localStorage.getItem("category");
+let [quizname, questionNumber, difficulty, category] = [
+    localStorage.getItem("quizname"),
+    localStorage.getItem("questionNumber"),
+    localStorage.getItem("difficulty").toLowerCase(),
+    localStorage.getItem("category")
+];
+
 let categorynumber;
 
 switch(category){
