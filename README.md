@@ -1,54 +1,50 @@
-# Web Advanced
-Voor mijn portfolio voor het vak Web Advanced heb ik besloten om een quiz-generator te maken. Triviatainment, de naam van mijn applicatie, geeft gebruikers de mogelijkheid om oftewel zelf een quiz te maken oftewel er één te genereren aan de hand van een Quiz-API. 
+# Web Advanced Portfolio: Triviatainment - Quiz Generator
 
-----------
-Onderwerpen: 
-quizForm.html + quizForm.js:
-Formulier valideren + Event aan een element koppelen + Gebruik van LocalStorage + Gebruiken van een constante:  Op Triviatainment is er een formulier die gebruikers moeten invullen om hen een quiz op maat te kunnen genereren. Vanaf het moment dat het formulier wordt verzonden (gebruik van een submit event + constante voor het formulier om dit op te vangen), wordt de data hiervan gestoken in LocalStorage om het in de volgende page te kunnen gebruiken. 
- 
-preMade.js: 
-Elementen selecteren: lijn 98
-Elementen manipuleren: lijn 99 (gebruik van JS om tekst te laten verschijnen)
-Gebruiken van template literals: lijn 127
-Async & Await: lijn 348
-Fetch om data op te halen: lijn 349 (fetch van vragen uit een Trivia Databank adhv een API)
-Consumer methods: lijn 354 (als de fetch succesvol is (opgevangen adhv .then), wordt deze weergegeven op de pagina)
-Iteration over een array + JSON manipuleren en weergeven: lijn 355
-Arrow function: lijn 182 (een functie die veranderingen in vragen van de quiz opvangt en op basis daarvan de stijl + content van een button verandert)
-Promise: lijn 273 (promise om de quiz te saven in LocalStorage die, afhankelijk van de response, de content en style van een button gaat wijzigen)
+Welkom bij Triviatainment, een applicatie waarmee gebruikers gepersonaliseerde quizzen kunnen maken of genereren met behulp van een Quiz-API.
 
-myQuizzes.js:
-Callback function: lijn 60 (een callback functie die als argument wordt doorgegeven aan de filter-methode om een array te filteren)
-Spread & Rest operator: lijn 57
+## Onderwerpen
+### quizForm.html + quizForm.js:
+- **Formulier validatie:** Gebruikers moeten een formulier invullen om een quiz op maat te kunnen genereren. Het formulier valideert inputgegevens. (lijn 6)
+- **Event handling:** Het formulier wordt afgehandeld met een submit event. (lijn 6)
+- **Gebruik van een constante:** Gebruik van een constante om het formulier vast te leggen. (lijn 4)
+- **LocalStorage:** Gebruik van LocalStorage om formuliergegevens op te slaan voor gebruik op de volgende pagina. (lijn 19 - 22)
 
-Self executing function
-Destructuring
+### preMade.js:
+- **Element selecteren en manipuleren:** Elementen worden geselecteerd en gemanipuleerd met JavaScript. (lijn 98)
+- **Template literals:** (lijn 126)
+- **Async & Await:** (lijn 345)
+- **Fetch API:** Data wordt opgehaald uit een Trivia-database met behulp van een API-fetch. (lijn 346)
+- **Consumer methods:** Het resultaat van de fetch, de vragen van de quiz, wordt weergegeven op de pagina. (lijn 351)
+- **Array iteratie en JSON manipulatie:** Iteratie over een array en manipulatie van JSON-gegevens voor weergave. (lijn 352)
+- **Arrow functions:** (lijn 181)
+- **Promise:** Gebruik van promises om gegevens op te slaan in LocalStorage en de weergave van de save-button te wijzigen op basis van de respons. (lijn 272)
 
-home.css:
-Basis CSS Animatie: lijn 13
+### myQuizzes.js:
+- **Callback functie:** Gebruik van een callback-functie die als argument wordt doorgegeven aan de filter-methode. (lijn 56)
+- **Spread & Rest operator:** Gebruik van de spread & rest operator voor het manipuleren van arrays. (lijn 57)
 
-preMade.css: 
-Gebruiken van een flexbox of CSS grid: lijn 60
+### CSS-stijlen:
+- **home.css:** Basis CSS-animatie. (lijn 13)
+- **preMade.css:** Gebruik van een flexbox of CSS-grid. (lijn 60)
 
-----------
-Gebruikte bronnen: 
-- bug fix in preMade.js: 
+## Gebruikte bronnen
+- **bug fix in preMade.js:**
 https://chatgpt.com/share/a103f4c5-c40a-4a4c-bf9c-e7fa8de18602
 https://chatgpt.com/share/b1432eff-89a5-48c3-b447-e4655395ae1e
 https://chatgpt.com/share/eafc9fed-a4b8-4b0b-bbed-b3fd49599ac6
 
-- shuffle array function: https://chatgpt.com/share/2d63f8cd-c52b-4457-a51b-14f1ed923853 
+- **shuffle array function:** https://chatgpt.com/share/2d63f8cd-c52b-4457-a51b-14f1ed923853 
 
-- alfabetisch sorteren van options in quizForm.html: https://chatgpt.com/share/ce6e5745-de4d-4d13-a3d3-1b00e1f35c19 
+- **alfabetisch sorteren van options in quizForm.html:** https://chatgpt.com/share/ce6e5745-de4d-4d13-a3d3-1b00e1f35c19 
 
-- typing Text Function + blinking bar in home.html: https://chatgpt.com/share/e3963c8c-1902-4dbf-87f4-bfd8198e0db9
+- **typing Text Function + blinking bar in home.html:** https://chatgpt.com/share/e3963c8c-1902-4dbf-87f4-bfd8198e0db9
 
-- add icon logo to site: https://www.geeksforgeeks.org/how-to-add-icon-logo-in-title-bar-using-html/
+- **add icon logo to site:** https://www.geeksforgeeks.org/how-to-add-icon-logo-in-title-bar-using-html/
 
-- hierarchy in js:
+- **hierarchy in js:**
 https://chatgpt.com/share/3264044d-4ceb-4e2c-a13e-f7d5648a91be 
 https://chatgpt.com/share/09369a72-b684-455b-8f2f-190692009281
 
-- suggesties QUIZ api: https://chatgpt.com/share/ab354e7a-7cd5-40fd-baf2-1bd383f64c73
+- **suggesties QUIZ api:** https://chatgpt.com/share/ab354e7a-7cd5-40fd-baf2-1bd383f64c73
 
-- gebruikte API: https://opentdb.com/ 
+- **gebruikte API:** https://opentdb.com/ 
