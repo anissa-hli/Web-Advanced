@@ -1,6 +1,5 @@
 'use strict'
 
-//functie: https://chatgpt.com/c/7ecbfdbe-7cf7-4495-b3b0-af6f4e6b8a3e
 let text = "Let the fun begin";
 let typeTextArea = document.getElementById('typingText');
 let blinkingBar = document.getElementById('blinkingBar');

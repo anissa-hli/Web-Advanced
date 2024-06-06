@@ -104,8 +104,7 @@ typeText(pDiff,`Difficulty: ${difficulty}`,100)
 
 
 //FUNCTIONS
-
-function shuffleArray(array) { //randomly ordered - to avoid correct answer always being last !!https://chat.openai.com/c/142f9656-8aba-45ce-ac73-4c154934c1c7 
+function shuffleArray(array) { //randomly ordered - to avoid correct answer always being last !!
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
@@ -273,7 +272,6 @@ document.addEventListener('click', function (e) {
         new Promise((resolve, reject) => {
 
             let quizzes = JSON.parse(localStorage.getItem('AllQuizzes')) || [];
-
             let quizFound = false;
 
             for (let quiz of quizzes) {
@@ -290,7 +288,6 @@ document.addEventListener('click', function (e) {
             }
 
             localStorage.setItem('AllQuizzes', JSON.stringify(quizzes));
-            console.log(JSON.parse(localStorage.getItem('AllQuizzes')));
             resolve('Saved succesfully');
         }).then((result) => {
             saveButton.textContent = result

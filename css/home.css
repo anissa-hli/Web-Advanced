@@ -7,13 +7,19 @@ body{
     color:white;
     font-family:"Ubuntu Mono";
     margin:auto 2em;
-
     padding:0;
 }
 
+@keyframes colorChange {
+    0% { color: #FF2D55; } 
+    25% { color: #FF4081; } 
+    50% { color: coral; } 
+    75% { color: palevioletred; } 
+    100% { color: #E95793; }
+}
+
 #title{
-    color:#E95793;
-    /* green coding color #00CC00; */
+    animation: colorChange 5s infinite alternate; 
     font-family:"Pacifico";
     word-spacing:20px;
     font-size: 350%;

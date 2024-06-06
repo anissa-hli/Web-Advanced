@@ -35,10 +35,6 @@ if(localStorage.getItem('AllQuizzes') && JSON.parse(localStorage.getItem('AllQui
     buttonEdit.textContent="Edit quiz";
     divButtons.appendChild(buttonEdit)
 
-    let buttonTake=document.createElement('button');
-    buttonTake.textContent="Take quiz";
-    divButtons.appendChild(buttonTake)
-
     let deleteImg=document.createElement('img');
     deleteImg.src='../images/x-delete.svg';
     deleteImg.classList.add("verwijder");
@@ -57,16 +53,14 @@ document.addEventListener('click',function(e){
  //delete quiz
  document.addEventListener('click',function(e){
     if(e.target.classList.contains('verwijder')){
-    AllQuizzes=AllQuizzes.filter((quiz) => quiz.name != e.target.id); //callback?
-    console.log(AllQuizzes);     
-    localStorage.setItem('AllQuizzes',JSON.stringify(AllQuizzes));
+    AllQuizzes=AllQuizzes.filter((quiz) => quiz.name != e.target.id);  
+    localStorage.setItem('AllQuizzes',JSON.stringify([...AllQuizzes]));
     location.reload();
     }
 })
 
 
 }else{
-
     let h2=document.createElement('h2');
     h2.id="Oops"
     h2.innerHTML="Oops, looks like you haven't made any quizzes yet. <a href='../html/quizForm.html'>Let's get started.</a> "
