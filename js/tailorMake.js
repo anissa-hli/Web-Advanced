@@ -10,6 +10,8 @@ let div = document.getElementById('container')
 let h2 = document.getElementById('quizname');
 h2.textContent = quizname;
 
+document.getElementById('chevron-right').style.opacity='0%'
+
 //category & difficulty
 let typeText = (typeTextArea, text, speed = 50, index = 0) => {
     if (index < text.length) {
@@ -94,7 +96,8 @@ quizContainer.appendChild(legend)
 let resetSaveButton = () => {
     saveButton.textContent = "Save changes"
     saveButton.style.backgroundColor = '';
-    saveButton.disabled = false
+    saveButton.disabled = false;
+    document.getElementById('chevron-right').style.opacity='0%'
 }
 
 
@@ -139,15 +142,6 @@ document.addEventListener('click', function (e) {
     }
 })
 
-//edit quizname
-document.addEventListener('click', function (e) {
-    if (e.target.classList.contains('editQuizname')) {
-        console.log(e)
-        let quizName = e.target.parentElement
-        console.log(quizName)
-        edit(quizName)
-    }
-})
 
 //save edited question     
 document.addEventListener('click', function (e) {
@@ -185,16 +179,35 @@ document.addEventListener('click', function (e) {
     }
 })
 
-//save quiz       
 document.addEventListener('click', function (e) {
     if (e.target.id == 'saveButton') {
         new Promise((resolve, reject) => {
-            localStorage.setItem(quizname, arrayOfQuestions)
+
+            let quizzes = JSON.parse(localStorage.getItem('AllQuizzes')) || [];
+
+            let quizFound = false;
+
+            for (let quiz of quizzes) {
+                if (quiz.name == quizname) {
+                    let index = quizzes.indexOf(quiz);
+                    quizzes[index] = { difficulty: difficulty,category: category, name: quizname, questions: arrayOfQuestions };
+                    quizFound = true;
+                    break;  
+                }
+            }
+            
+            if (!quizFound) {
+                quizzes.push({ difficulty: difficulty,category: category, name: quizname, questions: arrayOfQuestions });
+            }
+
+            localStorage.setItem('AllQuizzes', JSON.stringify(quizzes));
+            console.log(JSON.parse(localStorage.getItem('AllQuizzes')));
             resolve('Saved succesfully');
         }).then((result) => {
             saveButton.textContent = result
             saveButton.style.backgroundColor = '#32de84';
-            saveButton.disabled=true
+            saveButton.disabled=true;
+            document.getElementById('chevron-right').style.opacity='100%';
         },
             () => {
                 saveButton.textContent = 'Error. Retry'
@@ -203,21 +216,22 @@ document.addEventListener('click', function (e) {
     }
 })
 
+
 //create questions if chosen option was tailormake
 let newQuestion = (quantity) => {
     let quantityInt= parseInt(quantity);
     for(let j=0;j<quantityInt;j++){
     let answersNumber = prompt('How many different answers has your question?')
     let newQuestion = {
-        question: "q",
-        correct_answer: "c",
+        question: "Type question here.",
+        correct_answer: "Type correct answer here.",
         incorrect_answers: []
     }
 
     //if use doesnt respond to prompt;
     let number = answersNumber == 0 ? 2 : answersNumber
     for (let i = 1; i < number; i++) {
-        newQuestion.incorrect_answers.push('ic')
+        newQuestion.incorrect_answers.push('Type incorrect answer here.')
     }
     arrayOfQuestions.push(newQuestion);
     makeQuestion(newQuestion);

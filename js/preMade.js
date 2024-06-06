@@ -77,23 +77,7 @@ switch(category){
     
 }
 
-
-//fetch API 
-async function getData(){
-let data=await fetch(`https://opentdb.com/api.php?amount=${questionNumber}&category=${categorynumber}&difficulty=${difficulty}`);
-console.log(data)
-return await data.json()
-
-}
-
-getData().then(questions => {
-    for (let question of questions.results) {
-        arrayOfQuestions.push(question);
-        makeQuestion(question)
-    }
-})
-
-
+document.getElementById('chevron-right').style.opacity='0%'
 
 //quizname
 let div = document.getElementById('container')
@@ -116,7 +100,6 @@ let pCategory = document.getElementById('category');
 
 let pDiff = document.getElementById('difficulty',100);
 typeText(pDiff,`Difficulty: ${difficulty}`,100)
-
 
 
 
@@ -199,7 +182,9 @@ quizContainer.appendChild(legend)
 let resetSaveButton = () => {
     saveButton.textContent = "Save changes"
     saveButton.style.backgroundColor = '';
-    saveButton.disabled = false
+    saveButton.disabled = false;
+    document.getElementById('chevron-right').style.opacity='0%'
+
 }
 
 // remove a question
@@ -245,15 +230,6 @@ document.addEventListener('click', function (e) {
     }
 })
 
-//edit quizname
-document.addEventListener('click', function (e) {
-    if (e.target.classList.contains('editQuizname')) {
-        let quizName = e.target.parentElement
-        console.log(quizName)
-        edit(quizName)
-    }
-})
-
 //save edited question    
 document.addEventListener('click', function (e) {
     if (e.target.classList.contains('buttonSaveQuestion')) {
@@ -289,6 +265,8 @@ document.addEventListener('click', function (e) {
 
 //localStorage.removeItem('AllQuizzes');
 
+
+
 //save quiz       
 document.addEventListener('click', function (e) {
     if (e.target.id == 'saveButton') {
@@ -317,7 +295,8 @@ document.addEventListener('click', function (e) {
         }).then((result) => {
             saveButton.textContent = result
             saveButton.style.backgroundColor = '#32de84';
-            saveButton.disabled=true
+            saveButton.disabled=true;
+            document.getElementById('chevron-right').style.opacity='100%';
         },
             () => {
                 saveButton.textContent = 'Error. Retry'
@@ -348,9 +327,37 @@ document.addEventListener('click', function (e) {
 })
 
 
+//previously made quiz - user want to edit it
+let quizzes = JSON.parse(localStorage.getItem('AllQuizzes')) || [];
 
+let quizEdit = false;
 
+for (let quiz of quizzes) {
+    if (quiz.name == quizname) {
+        quizEdit = true;
+        console.log(quiz)
+        for(let question of quiz.questions){
+            arrayOfQuestions.push(question);
+            makeQuestion(question)
+        }
+        break;  
+    }
+}
 
+if (!quizEdit) {//new quiz - fetch API 
+async function getData(){
+let data=await fetch(`https://opentdb.com/api.php?amount=${questionNumber}&category=${categorynumber}&difficulty=${difficulty}`);
+console.log(data)
+return await data.json()
+}
+
+getData().then(questions => {
+    for (let question of questions.results) {
+        arrayOfQuestions.push(question);
+        makeQuestion(question)
+    }
+})
+}
 
 
 

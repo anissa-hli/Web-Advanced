@@ -57,6 +57,7 @@ a{
     gap:0.5em;
     align-items: center;
     border-radius:1em;
+    position: relative;
   }
   
   .quiz:hover{
@@ -88,9 +89,38 @@ a{
 #buttons button:hover{
     color:white;
     background-color: #E95793;
-    border:1px solid #E95793
+    border:1px solid #E95793;
+    cursor: pointer;
 }
 
+.verwijder{
+    width:1.25em;
+    position: absolute;
+    top:5%;
+    right:3%;
+    filter: invert(1) brightness(10000%); /* make the cross white */
+}
+
+.verwijder:hover{
+    cursor: pointer;
+}
+
+#Oops{
+    text-align: center;
+    padding:0;
+    margin:0;
+}
+
+#Oops a{
+    color:#E95793;
+    text-decoration: underline;
+}
+
+#catImg{
+    padding:0;
+    margin:0.5em auto;
+    width:30em;
+}
 
 /* footer */
 footer{
