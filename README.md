@@ -16,18 +16,18 @@ De regelnummers die ik bij elk onderwerp heb vermeld zijn enkel voorbeelden en b
 - **Async & Await:** (lijn 348)
 - **Fetch API:** Data wordt opgehaald uit een Trivia-database met behulp van een API-fetch. (lijn 349)
 - **Consumer methods:** Het resultaat van de fetch, de vragen van de quiz, wordt weergegeven op de pagina. (lijn 354)
-- **Array iteratie en JSON manipulatie:** Iteratie over een array en manipulatie van JSON-gegevens voor weergave. (lijn 355)
+- **Array iteratie en JSON manipulatie:** Iteratie over een array en manipulatie van JSON-gegevens voor weergave van de vragen op de pagina. (lijn 355)
 - **Arrow functions:** (lijn 184)
 - **Promise:** Gebruik van promises om gegevens op te slaan in LocalStorage en de weergave van de save-button te wijzigen op basis van de respons. (lijn 275)
 - **Destructuring:** (lijn 4)
 
 ### myQuizzes.js:
-- **Callback functie:** Gebruik van een callback-functie die als argument wordt doorgegeven aan de filter-methode. (lijn 56)
+- **Callback functie:** Gebruik van een callback-functie die als argument wordt doorgegeven aan de filter-methode voor het verwijderen van quizzen uit de array 'AllQuizzes' in LocalStorage. (lijn 56)
 - **Spread & Rest operator:** Gebruik van de spread & rest operator voor het manipuleren van arrays. (lijn 57)
 
 ### CSS-stijlen:
-- **home.css:** Basis CSS-animatie. (lijn 13)
-- **preMade.css:** Gebruik van een flexbox of CSS-grid. (lijn 60)
+- **home.css:** Basis CSS-animatie voor het veranderen van de kleur van de titel. (lijn 13)
+- **preMade.css:** Gebruik van een flexbox of CSS-grid om de verschillende vragen mooi onder elkaar te krijgen. (lijn 60)
 
 ## Gebruikte bronnen
 - **bug fix in preMade.js:**
