@@ -6,7 +6,7 @@ body{
     background-color: black;
     color:white;
     font-family:"Ubuntu Mono";
-    margin:auto 4em;
+    margin:auto 2em;
 
     padding:0;
 }
@@ -53,3 +53,22 @@ footer{
     padding:1em;
 }
 
+#quizzesNav{
+   text-align: right;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color:#E95793;
+    font-weight: 100;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+}
+
+nav{
+    margin:0.5em 0.1em auto auto;
+    display: flex;
+    justify-content: end;
+}
+
+#quizesNav:hover{
+    cursor:pointer;
+}

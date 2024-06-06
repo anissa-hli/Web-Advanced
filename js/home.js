@@ -40,3 +40,6 @@ typeTextArea.addEventListener('click',function(){
         window.open('quizForm.html','_self')
 })
 
+if(localStorage.getItem('AllQuizzes')){
+    document.getElementById('quizzesNav').textContent="My Quizzes"
+}

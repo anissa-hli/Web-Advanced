@@ -47,6 +47,34 @@ switch(category){
     case "Nature":
         categorynumber = 17;
         break;
+    case "History":
+        categorynumber = 23;
+        break;
+    case "Comics":
+        categorynumber = 29;
+        break;
+    case "Mythology":
+        categorynumber = 20;
+        break;
+    case "Politics":
+        categorynumber = 24;
+        break;
+    case "Computers":
+        categorynumber = 18;
+        break;
+    case "Board games":
+        categorynumber = 16;
+        break;
+    case "Video games":
+        categorynumber = 15;
+        break;
+    case "Television":
+        categorynumber = 14;
+        break;
+    case "Cartoon & Animations":
+        categorynumber = 32;
+        break;
+    
 }
 
 
@@ -254,24 +282,37 @@ document.addEventListener('click', function (e) {
             
         }
         arrayOfQuestions[currentQuestion.parentElement.classList.value] = editedQuestion;
-   
-        //
       currentQuestion.parentElement.children[1].children[2].remove()
-      console.log(arrayOfQuestions)
         resetSaveButton()
     }
 })
 
+//localStorage.removeItem('AllQuizzes');
 
 //save quiz       
 document.addEventListener('click', function (e) {
     if (e.target.id == 'saveButton') {
         new Promise((resolve, reject) => {
 
-            let quizes = JSON.parse(localStorage.getItem('AllQuizes')) || [];
-            quizes.push({ name: quizname, questions: arrayOfQuestions });
-            localStorage.setItem('AllQuizes', JSON.stringify(quizes));
-            console.log(JSON.parse(localStorage.getItem('AllQuizes')));
+            let quizzes = JSON.parse(localStorage.getItem('AllQuizzes')) || [];
+
+            let quizFound = false;
+
+            for (let quiz of quizzes) {
+                if (quiz.name == quizname) {
+                    let index = quizzes.indexOf(quiz);
+                    quizzes[index] = { difficulty: difficulty,category: category, name: quizname, questions: arrayOfQuestions };
+                    quizFound = true;
+                    break;  
+                }
+            }
+            
+            if (!quizFound) {
+                quizzes.push({ difficulty: difficulty,category: category, name: quizname, questions: arrayOfQuestions });
+            }
+
+            localStorage.setItem('AllQuizzes', JSON.stringify(quizzes));
+            console.log(JSON.parse(localStorage.getItem('AllQuizzes')));
             resolve('Saved succesfully');
         }).then((result) => {
             saveButton.textContent = result
