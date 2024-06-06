@@ -4,7 +4,7 @@ Welkom bij Triviatainment, een applicatie waarmee gebruikers gepersonaliseerde q
 
 ## Onderwerpen
 De regelnummers die ik bij elk onderwerp heb vermeld zijn enkel voorbeelden en bij lange niet de enige plaatsen waar het onderwerp is opgenomen.
-### quizForm.html + quizForm.js:
+### quizForm.js:
 - **Formulier validatie:** Gebruikers moeten een formulier invullen om een quiz op maat te kunnen genereren. Het formulier valideert inputgegevens. (lijn 6)
 - **Event handling:** Het formulier wordt afgehandeld met een submit event. (lijn 6)
 - **Gebruik van een constante:** Gebruik van een constante om het formulier vast te leggen. (lijn 4)
