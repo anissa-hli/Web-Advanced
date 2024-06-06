@@ -39,6 +39,3 @@ typeTextArea.addEventListener('click',function(){
         window.open('quizForm.html','_self')
 })
 
-if(localStorage.getItem('AllQuizzes') && JSON.parse(localStorage.getItem('AllQuizzes')).length>0){ //if it exists & it's not empty
-    document.getElementById('quizzesNav').textContent="My Quizzes"
-}
