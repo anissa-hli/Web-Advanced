@@ -10,6 +10,9 @@ De regelnummers die ik bij elk onderwerp heb vermeld zijn enkel voorbeelden en b
 - **Gebruik van een constante:** Gebruik van een constante om het formulier vast te leggen. (lijn 4)
 - **LocalStorage:** Gebruik van LocalStorage om formuliergegevens op te slaan voor gebruik op de volgende pagina. (lijn 19 - 22)
 
+### home.js
+- **Self Executing Function:** blink bar function (de functie zelf is door ChatGPT geschreven, maar ik heb het self-executing gemaakt.) (lijn 14) 
+
 ### preMade.js:
 - **Element selecteren en manipuleren:** Elementen worden geselecteerd en gemanipuleerd met JavaScript. (lijn 101-102)
 - **Template literals:** (lijn 129)

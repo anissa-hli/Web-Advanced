@@ -11,24 +11,24 @@ let typeText = (text, speed = 50, index = 0) => {
             typeText(text, speed, index + 1);
         }, speed);
     } else {
-        // Reset the index and start the blinking bar
-        blinkBar();
+        (function blinkBar () {
+            let bar = '|';
+            let isVisible = true;
+        
+            setInterval(function () {
+                if (isVisible) {
+                    typeTextArea.textContent = text + bar;
+                } else {
+                    typeTextArea.textContent = text;
+                }
+                isVisible = !isVisible;
+            }, 500); 
+        })()
+
     }
 }
 
-let blinkBar = () => {
-    let bar = '|';
-    let isVisible = true;
 
-    setInterval(function () {
-        if (isVisible) {
-            typeTextArea.textContent = text + bar;
-        } else {
-            typeTextArea.textContent = text;
-        }
-        isVisible = !isVisible;
-    }, 500); // Change the inerval as needed
-}
 
 window.onload = () => {
     typeText(text);
